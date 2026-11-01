@@ -1,0 +1,87 @@
+{
+  "mode": "inline",
+  "message_kind": "task",
+  "intent": "explore",
+  "exploration": true,
+  "dictionary_version": "parent-child-0.3.0",
+  "dictionary_sha256": "03cb06393ac9913e45ac4c6cec8fdf668eb31a99103f2f071872e057c39d6d98",
+  "source_sha256": "cf398d74f872c8095000ba3e600f8656aa6770f7f233abff6c66605284a4a5e0",
+  "used_operators": [
+    "探",
+    "知",
+    "需",
+    "索",
+    "求",
+    "解"
+  ],
+  "field_count": 6,
+  "warnings": [],
+  "external_fields": [],
+  "uncertainty_fields": [],
+  "return_operators": [
+    "不知",
+    "不可"
+  ],
+  "boundary_fields": [],
+  "source_chars": 136,
+  "output_chars": 1867,
+  "contract_chars": 863,
+  "output_utf8_bytes": 5273,
+  "tokens": {
+    "source": null,
+    "output": null,
+    "delta": null,
+    "contract": null
+  },
+  "token_note": "未提供目标模型计数器时不估算 token；contract 单独计数，分段 token 不保证可加。",
+  "base": {
+    "path": "opcode_table_128.json",
+    "version": "0.9.0-DualMode",
+    "sha256": "d3d9a30849ddc0f2be340afaed4099062a910d42f540922bcc5335b0f34dcc85"
+  },
+  "origins": {
+    "探": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 探【计算机】知【不明】需【如何工作】解【详细】提议；Jian-Prompt 新增。",
+      "status": "validated"
+    },
+    "知": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 派活及探索示例；知扩展为容纳明确未知的背景/认知状态字段。",
+      "status": "validated"
+    },
+    "需": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 探索组合中的需【如何工作】；Jian-Prompt 新增。",
+      "status": "validated"
+    },
+    "索": {
+      "kind": "adapted",
+      "base_token": "索",
+      "base_description": "Index lookup by offset/key; paired with 参 (args), 合 (&/join), 引 (import)",
+      "provenance": "用户 2026-11-01 指定索【】列出索引目录；从 Jian-Lang 索的索引定位概念显式适配为派活导航任务。",
+      "status": "validated"
+    },
+    "求": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 指定求【】针对不确定结论；本轮定义为保留不确定性的求证任务。",
+      "status": "validated"
+    },
+    "解": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 探索组合中的解【详细】；Jian-Prompt 新增。",
+      "status": "validated"
+    }
+  },
+  "enforcement": "结构/字典/模式检查；不验证事实、文件存在、权限、自然语言冲突或接收方遵循情况"
+}

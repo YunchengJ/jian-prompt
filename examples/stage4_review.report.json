@@ -1,0 +1,79 @@
+{
+  "mode": "inline",
+  "message_kind": "task",
+  "intent": "analyze",
+  "exploration": false,
+  "dictionary_version": "parent-child-0.3.0",
+  "dictionary_sha256": "03cb06393ac9913e45ac4c6cec8fdf668eb31a99103f2f071872e057c39d6d98",
+  "source_sha256": "11a491c31c70fb9234864eb55d1cfd649f804241b244f2720664910f7748de14",
+  "used_operators": [
+    "今",
+    "知",
+    "参",
+    "禁",
+    "论"
+  ],
+  "field_count": 5,
+  "warnings": [],
+  "external_fields": [],
+  "uncertainty_fields": [],
+  "return_operators": [
+    "不知",
+    "不可"
+  ],
+  "boundary_fields": [],
+  "source_chars": 118,
+  "output_chars": 1374,
+  "contract_chars": 567,
+  "output_utf8_bytes": 3712,
+  "tokens": {
+    "source": null,
+    "output": null,
+    "delta": null,
+    "contract": null
+  },
+  "token_note": "未提供目标模型计数器时不估算 token；contract 单独计数，分段 token 不保证可加。",
+  "base": {
+    "path": "opcode_table_128.json",
+    "version": "0.9.0-DualMode",
+    "sha256": "d3d9a30849ddc0f2be340afaed4099062a910d42f540922bcc5335b0f34dcc85"
+  },
+  "origins": {
+    "今": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 父子代理派活示例；Jian-Prompt 新增字段。",
+      "status": "validated"
+    },
+    "知": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 派活及探索示例；知扩展为容纳明确未知的背景/认知状态字段。",
+      "status": "validated"
+    },
+    "参": {
+      "kind": "adapted",
+      "base_token": "参",
+      "base_description": "Index lookup by offset/key; paired with 参 (args), 合 (&/join), 引 (import)",
+      "provenance": "Jian-Lang 参属于索族形参；按用户派活示例显式映射为参考材料，不宣称两义等价。",
+      "status": "validated"
+    },
+    "禁": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 禁止改写原件和跨目录扫盘示例；Jian-Prompt 新增字段。",
+      "status": "validated"
+    },
+    "论": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 正文与 SI 一致性核对示例；Jian-Prompt 新增字段。",
+      "status": "validated"
+    }
+  },
+  "enforcement": "结构/字典/模式检查；不验证事实、文件存在、权限、自然语言冲突或接收方遵循情况"
+}

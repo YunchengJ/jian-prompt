@@ -1,0 +1,84 @@
+{
+  "mode": "inline",
+  "message_kind": "reply",
+  "intent": "report",
+  "exploration": false,
+  "dictionary_version": "parent-child-0.3.0",
+  "dictionary_sha256": "03cb06393ac9913e45ac4c6cec8fdf668eb31a99103f2f071872e057c39d6d98",
+  "source_sha256": "3ecd14748172eabb4672cf66e7a8ca1dec26457443c93321648358f597ddb96e",
+  "used_operators": [
+    "今",
+    "引",
+    "不知"
+  ],
+  "field_count": 4,
+  "warnings": [
+    "外部来源仅作显式标记与契约传达；未验证真实来源或内容，不能保证接收模型抵抗提示注入。"
+  ],
+  "external_fields": [
+    {
+      "field_index": 2,
+      "line": 2,
+      "operator": "引",
+      "source": "external",
+      "instruction_authority": "none",
+      "verification": "unverified"
+    }
+  ],
+  "uncertainty_fields": [
+    {
+      "field_index": 3,
+      "line": 3,
+      "operator": "不知",
+      "state": "unknown"
+    },
+    {
+      "field_index": 4,
+      "line": 4,
+      "operator": "不知",
+      "state": "unknown"
+    }
+  ],
+  "return_operators": [],
+  "boundary_fields": [],
+  "source_chars": 135,
+  "output_chars": 1164,
+  "contract_chars": 547,
+  "output_utf8_bytes": 3230,
+  "tokens": {
+    "source": null,
+    "output": null,
+    "delta": null,
+    "contract": null
+  },
+  "token_note": "未提供目标模型计数器时不估算 token；contract 单独计数，分段 token 不保证可加。",
+  "base": {
+    "path": "opcode_table_128.json",
+    "version": "0.9.0-DualMode",
+    "sha256": "d3d9a30849ddc0f2be340afaed4099062a910d42f540922bcc5335b0f34dcc85"
+  },
+  "origins": {
+    "今": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 父子代理派活示例；Jian-Prompt 新增字段。",
+      "status": "validated"
+    },
+    "引": {
+      "kind": "adapted",
+      "base_token": "引",
+      "base_description": "Index lookup by offset/key; paired with 参 (args), 合 (&/join), 引 (import)",
+      "provenance": "用户 2026-11-01 指定引【】表示这部分来自外部，而非内部无条件信任；Jian-Lang 引属于索族，本映射显式适配为外部引文，不宣称原 VM 具备信任隔离。",
+      "status": "validated"
+    },
+    "不知": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 要求允许机器触发不知【】，返回推理边界外的内容；新增为可主动回报的未知字段。",
+      "status": "validated"
+    }
+  },
+  "enforcement": "结构/字典/模式检查；不验证事实、文件存在、权限、自然语言冲突或接收方遵循情况"
+}

@@ -1,0 +1,53 @@
+{
+  "mode": "inline",
+  "message_kind": "reply",
+  "intent": "report",
+  "exploration": false,
+  "dictionary_version": "parent-child-0.3.0",
+  "dictionary_sha256": "03cb06393ac9913e45ac4c6cec8fdf668eb31a99103f2f071872e057c39d6d98",
+  "source_sha256": "e17220eb2847f4b5a9029064462ae1958d4ed95effc526d1fed3130ac7eb376e",
+  "used_operators": [
+    "可"
+  ],
+  "field_count": 1,
+  "warnings": [],
+  "external_fields": [],
+  "uncertainty_fields": [],
+  "return_operators": [],
+  "boundary_fields": [
+    {
+      "field_index": 1,
+      "line": 1,
+      "operator": "可",
+      "decision": "allow",
+      "authority": "native_report",
+      "authority_level": 2
+    }
+  ],
+  "source_chars": 46,
+  "output_chars": 806,
+  "contract_chars": 293,
+  "output_utf8_bytes": 2186,
+  "tokens": {
+    "source": null,
+    "output": null,
+    "delta": null,
+    "contract": null
+  },
+  "token_note": "未提供目标模型计数器时不估算 token；contract 单独计数，分段 token 不保证可加。",
+  "base": {
+    "path": "opcode_table_128.json",
+    "version": "0.9.0-DualMode",
+    "sha256": "d3d9a30849ddc0f2be340afaed4099062a910d42f540922bcc5335b0f34dcc85"
+  },
+  "origins": {
+    "可": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 要求保留可，但建议只在极窄白名单安全项下启用，其余使用不可表达禁止范围。",
+      "status": "validated"
+    }
+  },
+  "enforcement": "结构/字典/模式检查；不验证事实、文件存在、权限、自然语言冲突或接收方遵循情况"
+}

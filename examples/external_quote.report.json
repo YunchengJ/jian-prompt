@@ -1,0 +1,82 @@
+{
+  "mode": "inline",
+  "message_kind": "task",
+  "intent": "analyze",
+  "exploration": false,
+  "dictionary_version": "parent-child-0.3.0",
+  "dictionary_sha256": "03cb06393ac9913e45ac4c6cec8fdf668eb31a99103f2f071872e057c39d6d98",
+  "source_sha256": "bf31f6e5a3a631951400705a6c08f7bf200f9827c0907b4c7c0b4c80b0355008",
+  "used_operators": [
+    "今",
+    "引",
+    "求",
+    "返"
+  ],
+  "field_count": 4,
+  "warnings": [
+    "外部来源仅作显式标记与契约传达；未验证真实来源或内容，不能保证接收模型抵抗提示注入。"
+  ],
+  "external_fields": [
+    {
+      "field_index": 2,
+      "line": 2,
+      "operator": "引",
+      "source": "external",
+      "instruction_authority": "none",
+      "verification": "unverified"
+    }
+  ],
+  "uncertainty_fields": [],
+  "return_operators": [
+    "不知",
+    "不可"
+  ],
+  "boundary_fields": [],
+  "source_chars": 136,
+  "output_chars": 1515,
+  "contract_chars": 572,
+  "output_utf8_bytes": 4251,
+  "tokens": {
+    "source": null,
+    "output": null,
+    "delta": null,
+    "contract": null
+  },
+  "token_note": "未提供目标模型计数器时不估算 token；contract 单独计数，分段 token 不保证可加。",
+  "base": {
+    "path": "opcode_table_128.json",
+    "version": "0.9.0-DualMode",
+    "sha256": "d3d9a30849ddc0f2be340afaed4099062a910d42f540922bcc5335b0f34dcc85"
+  },
+  "origins": {
+    "今": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 父子代理派活示例；Jian-Prompt 新增字段。",
+      "status": "validated"
+    },
+    "引": {
+      "kind": "adapted",
+      "base_token": "引",
+      "base_description": "Index lookup by offset/key; paired with 参 (args), 合 (&/join), 引 (import)",
+      "provenance": "用户 2026-11-01 指定引【】表示这部分来自外部，而非内部无条件信任；Jian-Lang 引属于索族，本映射显式适配为外部引文，不宣称原 VM 具备信任隔离。",
+      "status": "validated"
+    },
+    "求": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 指定求【】针对不确定结论；本轮定义为保留不确定性的求证任务。",
+      "status": "validated"
+    },
+    "返": {
+      "kind": "adapted",
+      "base_token": "返",
+      "base_description": "Right-to-left value bind (←, =), or directed non-local jump to 【纲/目/法】",
+      "provenance": "从 Jian-Lang 返的结果回送概念映射为交付约定。",
+      "status": "validated"
+    }
+  },
+  "enforcement": "结构/字典/模式检查；不验证事实、文件存在、权限、自然语言冲突或接收方遵循情况"
+}

@@ -1,0 +1,71 @@
+{
+  "mode": "inline",
+  "message_kind": "task",
+  "intent": "explore",
+  "exploration": true,
+  "dictionary_version": "parent-child-0.3.0",
+  "dictionary_sha256": "03cb06393ac9913e45ac4c6cec8fdf668eb31a99103f2f071872e057c39d6d98",
+  "source_sha256": "1ca21f7df26cd000b2ade2149dbaae294424a40bee0d2583356c892dada27ca3",
+  "used_operators": [
+    "探",
+    "知",
+    "需",
+    "解"
+  ],
+  "field_count": 4,
+  "warnings": [],
+  "external_fields": [],
+  "uncertainty_fields": [],
+  "return_operators": [
+    "不知",
+    "不可"
+  ],
+  "boundary_fields": [],
+  "source_chars": 27,
+  "output_chars": 1459,
+  "contract_chars": 566,
+  "output_utf8_bytes": 4087,
+  "tokens": {
+    "source": null,
+    "output": null,
+    "delta": null,
+    "contract": null
+  },
+  "token_note": "未提供目标模型计数器时不估算 token；contract 单独计数，分段 token 不保证可加。",
+  "base": {
+    "path": "opcode_table_128.json",
+    "version": "0.9.0-DualMode",
+    "sha256": "d3d9a30849ddc0f2be340afaed4099062a910d42f540922bcc5335b0f34dcc85"
+  },
+  "origins": {
+    "探": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 探【计算机】知【不明】需【如何工作】解【详细】提议；Jian-Prompt 新增。",
+      "status": "validated"
+    },
+    "知": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 派活及探索示例；知扩展为容纳明确未知的背景/认知状态字段。",
+      "status": "validated"
+    },
+    "需": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 探索组合中的需【如何工作】；Jian-Prompt 新增。",
+      "status": "validated"
+    },
+    "解": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 探索组合中的解【详细】；Jian-Prompt 新增。",
+      "status": "validated"
+    }
+  },
+  "enforcement": "结构/字典/模式检查；不验证事实、文件存在、权限、自然语言冲突或接收方遵循情况"
+}

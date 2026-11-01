@@ -1,0 +1,69 @@
+{
+  "mode": "inline",
+  "message_kind": "policy",
+  "intent": "policy",
+  "exploration": false,
+  "dictionary_version": "parent-child-0.3.0",
+  "dictionary_sha256": "03cb06393ac9913e45ac4c6cec8fdf668eb31a99103f2f071872e057c39d6d98",
+  "source_sha256": "12fc662aa20080eff8118de57e645e835435a4fc1b15bf94cd782d1f692052a5",
+  "used_operators": [
+    "令可",
+    "令不可"
+  ],
+  "field_count": 2,
+  "warnings": [],
+  "external_fields": [],
+  "uncertainty_fields": [],
+  "return_operators": [],
+  "boundary_fields": [
+    {
+      "field_index": 1,
+      "line": 1,
+      "operator": "令可",
+      "decision": "allow",
+      "authority": "command",
+      "authority_level": 1
+    },
+    {
+      "field_index": 2,
+      "line": 2,
+      "operator": "令不可",
+      "decision": "deny",
+      "authority": "command",
+      "authority_level": 1
+    }
+  ],
+  "source_chars": 25,
+  "output_chars": 882,
+  "contract_chars": 385,
+  "output_utf8_bytes": 2396,
+  "tokens": {
+    "source": null,
+    "output": null,
+    "delta": null,
+    "contract": null
+  },
+  "token_note": "未提供目标模型计数器时不估算 token；contract 单独计数，分段 token 不保证可加。",
+  "base": {
+    "path": "opcode_table_128.json",
+    "version": "0.9.0-DualMode",
+    "sha256": "d3d9a30849ddc0f2be340afaed4099062a910d42f540922bcc5335b0f34dcc85"
+  },
+  "origins": {
+    "令可": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 将人源许可改为令可，并将权限下调一级；调用方来源仍须由宿主确认。",
+      "status": "validated"
+    },
+    "令不可": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 将人源禁止改为令不可，并将权限下调一级。",
+      "status": "validated"
+    }
+  },
+  "enforcement": "结构/字典/模式检查；不验证事实、文件存在、权限、自然语言冲突或接收方遵循情况"
+}

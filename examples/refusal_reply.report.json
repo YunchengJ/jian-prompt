@@ -1,0 +1,53 @@
+{
+  "mode": "inline",
+  "message_kind": "reply",
+  "intent": "report",
+  "exploration": false,
+  "dictionary_version": "parent-child-0.3.0",
+  "dictionary_sha256": "03cb06393ac9913e45ac4c6cec8fdf668eb31a99103f2f071872e057c39d6d98",
+  "source_sha256": "fd45123a57c0fe58276862cab0664c7bb5ee4a53deef4a84e26e1af4d3ecdbc9",
+  "used_operators": [
+    "不可"
+  ],
+  "field_count": 1,
+  "warnings": [],
+  "external_fields": [],
+  "uncertainty_fields": [],
+  "return_operators": [],
+  "boundary_fields": [
+    {
+      "field_index": 1,
+      "line": 1,
+      "operator": "不可",
+      "decision": "deny",
+      "authority": "native_report",
+      "authority_level": 2
+    }
+  ],
+  "source_chars": 45,
+  "output_chars": 792,
+  "contract_chars": 280,
+  "output_utf8_bytes": 2144,
+  "tokens": {
+    "source": null,
+    "output": null,
+    "delta": null,
+    "contract": null
+  },
+  "token_note": "未提供目标模型计数器时不估算 token；contract 单独计数，分段 token 不保证可加。",
+  "base": {
+    "path": "opcode_table_128.json",
+    "version": "0.9.0-DualMode",
+    "sha256": "d3d9a30849ddc0f2be340afaed4099062a910d42f540922bcc5335b0f34dcc85"
+  },
+  "origins": {
+    "不可": {
+      "kind": "extension",
+      "base_token": null,
+      "base_description": null,
+      "provenance": "用户 2026-11-01 规定模型原生不可优先；后续将人源禁止另分为低一级令不可，本字段保留为上层拒绝回报。",
+      "status": "validated"
+    }
+  },
+  "enforcement": "结构/字典/模式检查；不验证事实、文件存在、权限、自然语言冲突或接收方遵循情况"
+}
