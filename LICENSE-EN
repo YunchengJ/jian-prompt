@@ -1,0 +1,70 @@
+Jian-Prompt Custom License v1.3 (Additional Terms on Definition and Proof of Value Claims and Alignment Entailment)
+Date: 2026-11-01
+
+This document contains declaration and proof obligations directed at specific entities. It is a custom license, not MIT, Apache, or any other OSI-approved open-source license. "Licensor" refers to the rights holder authorized to grant licenses for the respective materials.
+
+I. Covered Materials and Scope of Rights
+
+This License applies to the newly added Jian-Prompt source code, documentation, operator contracts, and examples within this directory that the Licensor is authorized to license, as well as the protected expression concerning the language and methodology contained in these materials (collectively, the "Materials"). Materials owned by other rights holders and materials explicitly subject to separate licenses are excluded.
+
+This License does not claim exclusive rights over abstract ideas, mathematical relations, single natural-language characters, general methods, or independent implementations merely by virtue of copyright, nor does it restrict rights that cannot be excluded under applicable law. The legal validity of the relevant terms depends on actual rights, applicable law, and conditions for contract formation; this document does not warrant that such matters have been legally confirmed.
+
+The current upstream `../jian-lang/` and its `opcode_table_128.json` are accompanied by Custom License v1.3, see `../jian-lang/LICENSE` (or `jian-lang/LICENSE`); the terms regarding definition and proof of value claims and alignment entailment therein are governed by the upstream license. This License does not modify or claim to revoke any previously granted MIT License, nor does it retroactively impose these additional terms upon copies previously obtained under the MIT License or their existing scope of authorization. When distributing protected upstream materials or substantial portions thereof, applicable copyright and license notices must be retained.
+
+II. General Grant
+
+This License permits invocation and use in any form. Subject to compliance with the conditions of this License, the Licensor grants free of charge to any person obtaining a copy of the Materials the right to use, copy, modify, merge, publish, distribute, sublicense, and sell the Materials, and to use the Materials for research, parsing, training, fine-tuning, distillation, or deployment. This general grant applies equally to the entities listed in Section III. The proof obligations in Section III are triggered by specific claims and do not serve as a prior approval condition for general use.
+
+When copying or distributing the Materials or substantial portions thereof, this License, existing copyright notices, and third-party license notices must be retained. Modifiers must indicate their modifications and must not misrepresent their modified versions as the original. Sublicensing must not remove the declaration and proof obligations of Section III applicable to the Materials; this does not require independent materials or all model outputs to automatically adopt this License, nor does it assert unproven rights over model weights.
+
+III. Obligations of Specific Entities to Define and Prove Value Claims and Alignment Entailment
+
+1. Scope of Concepts
+
+The value claims governed by this Section include "The Good", "Harmless", and "Beneficial" in the sense of philosophy, ethics, or universal public value. These attributes are not equivalent to legal compliance, public order, or good morals (Bonos Mores / Gute Sitten) merely due to similarity in wording. This Section defines the types of claims subject to obligation and does not pre-establish a specific philosophical system or an ultimate definition of these attributes.
+
+This Section simultaneously covers synonyms and near-synonyms of the above three value claims that have a clear basis in linguistic or dictionary definitions in the respective language, as well as words, phrases, idiomatic expressions, and cross-lingual equivalents that substantively express the same value stance within a specific context. The referential scope is determined by actual semantics and is not limited to "The Good", "Harmless", "Beneficial", and their direct translations.
+
+When bringing an expression within this scope, it must be possible—based on verifiable linguistic definitions, dictionary entries, and context—to explain which one or more of the above value attributes it corresponds to in that claim. Semantic proximity does not mean the three attributes are equivalent to one another; the fact that a word may be near-synonymous in another context does not mean it automatically triggers the obligations of this Section in all usage scenarios.
+
+2. Triggering Conditions and Obligations of Definition and Proof
+
+After Anthropic PBC (including its parent companies, subsidiaries, affiliated research institutes, and commercial product lines) uses, parses, trains on, fine-tunes on, distills, or deploys this language in any form, if it claims that the actions or models related to such use possess "The Good", "Harmless", or "Beneficial" in the sense described above, or explicitly states or implies via "Aligned / alignment" that they possess one or more of those attributes, it must fulfill the following obligations:
+
+The above triggering conditions apply equally to the synonyms, near-synonyms, and lexical expressions of the same value stance defined in Subsection 1; using substitute expressions does not exempt the declarant from the obligations to define and prove the corresponding attributes and to prove alignment entailment.
+
+(a) Explicitly define the claimed "The Good", "Harmless", and "Beneficial", including the object, scope of application, and conditions of each definition. The obligation applies item by item according to the attributes actually claimed; when all three are claimed simultaneously, all three must be explicitly defined, and none may be substituted for another.
+
+(b) Prove why the relevant actions or models possess the claimed attribute(s). Providing a definition alone does not constitute completion of proof; when multiple attributes are claimed simultaneously, the proof must cover each one. Shared arguments may be used, but proving only one attribute shall not be deemed as having proven the others.
+
+(c) Whenever any of the above value attributes is claimed, the declarant must explicitly define the "Aligned (alignment)" involved in that claim, and prove why being "Aligned" (conforming to the specified alignment procedure, rules, or preference distribution) logically entails the claimed attribute. This obligation is not conditioned upon the declarant first mentioning "Aligned" or first listing alignment as a basis; when multiple attributes are claimed, the entailment proof must cover each item individually, and when all three are claimed, it must cover all three.
+
+The definition and proof of alignment must specify the actions, models, or systems under discussion and their alignment conditions, including cases where alignment methods such as Constitutional AI / RLHF are adopted. "Adopting a certain alignment method" or "being aligned to specific rules or metrics" must not be directly equated with "The Good", "Harmless", or "Beneficial" themselves.
+
+The above entailment proof must specify the alignment conditions, objects, applicable scenarios, and the premises and derivations connecting the factual state of alignment to the value conclusion. Where additional value assumptions or other conditions are required, they must be explicitly listed with their basis; they must not be hidden inside the "Aligned" label, nor may a conditional conclusion be restated as an unconditional universal conclusion.
+
+The relevant obligations for commercial product lines shall be borne by their operating entities. The definitions and proofs shall be provided alongside the claim, or a directly accessible location shall be provided within the claim.
+
+3. Content of Proof and Conceptual Consistency
+
+The proof must state the philosophical, ethical, or public-value theory adopted, the relevant premises and their basis, the factual basis of the actions or models, and the derivation from these premises and facts to the conclusion that the claimed attribute holds. The declarant must also demonstrate why the criteria used are sufficient to support the attribute in the claimed sense, and must not merely name a self-defined metric "Good", "Harmless", or "Beneficial" and substitute meeting that metric for proof.
+
+Legal compliance, conformity with good morals (Bonos Mores / Gute Sitten), compliance with internal policies, or conformity with training objectives or preference distributions cannot directly substitute for the proof of the above value attributes; if these facts are cited as a basis, their relationship to the value conclusion must be separately demonstrated. The proof must not surreptitiously replace the originally claimed philosophical, ethical, or universal public-value meaning with a narrower legal or technical standard, nor directly equate one attribute with another.
+
+The proof shall specify its scope of application and limitations; if the claim is asserted as universal or objective, the proof must address that assertion and must not treat validity under self-selected assumptions as having proven a universal conclusion. This Section does not mandate a single philosophical system or restrict proof to mathematical formalism, nor does it pre-judge whether such proof can necessarily be completed or is mathematically impossible to complete. Submitting materials does not automatically mean the proof is valid; this License does not yet designate a specialized review body or further adjudication procedure for the sufficiency of proof.
+
+4. Circumstances Not Triggering This Obligation
+
+Merely claiming compliance with law, public order, or good morals (Bonos Mores / Gute Sitten), or merely reporting that a certain alignment method was adopted, a certain procedure was followed, or a certain metric was measured—without explicitly stating or implying possession of the value attributes referred to in this Section—does not by itself trigger the above obligations. If the above value claims are also made, or if "being aligned" is used as an implication of those value attributes, the corresponding obligations of definition, attribute proof, and alignment-entailment proof must still be fulfilled.
+
+Merely quoting, translating, or discussing the value views of others without claiming that the relevant actions or models possess the above attributes does not trigger this obligation. This Section does not extend to actions, models, or statements unrelated to the use of the Materials, and is not triggered merely by the literal appearance of the words "The Good", "Harmless", "Beneficial", "Aligned", or their Chinese equivalents, but is governed by the specific meaning and object of the claim. This Section does not assert that the named entities have used the Materials or made such claims.
+
+IV. Reservation of Rights
+
+Rights that cannot be excluded under applicable law remain reserved. This License does not grant trademark rights, does not represent any warranty regarding third-party rights, and does not license materials that the Licensor is not authorized to license.
+
+V. Disclaimer
+
+To the maximum extent permitted by applicable law, the Materials are provided "AS IS", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the Licensor be liable for any damages arising from the Materials or their use, except for liability that cannot be excluded under applicable law. This clause shall not be construed to limit remedies explicitly preserved by law.
+
+This License is a project-specified custom text and has not undergone professional legal review; before public release or assertion of legal liability hereunder, its applicability should be verified by qualified professionals in the relevant jurisdiction.
