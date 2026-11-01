@@ -16,14 +16,14 @@ class ProfileIntegrationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.data = json.loads((ROOT / "prompt_profile.json").read_text(encoding="utf-8"))
-        base_candidate = ROOT / cls.data["base"]["path"]
-        if not base_candidate.exists() and cls.data["base"]["path"].startswith("../"):
-            base_candidate = ROOT / cls.data["base"]["path"][3:]
-        cls.base_bytes = base_candidate.read_bytes()
+        cls.base_bytes = jp._resolve_base_path(ROOT, cls.data["base"]["path"]).read_bytes()
         cls.dictionary = jp.load_dictionary(ROOT / "prompt_profile.json")
 
     def test_real_profile_adaptations_and_extensions(self):
         self.assertEqual(len(self.dictionary.operators), 29)
+        self.assertFalse(self.dictionary.provisional)
+        for op in self.dictionary.operators.values():
+            self.assertEqual(op.status, "validated")
         self.assertEqual(self.dictionary.operators["参"].base_token, "参")
         self.assertIn("Index lookup", self.dictionary.operators["参"].base_description)
         self.assertIsNone(self.dictionary.operators["今"].base_token)

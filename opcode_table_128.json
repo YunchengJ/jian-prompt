@@ -1,0 +1,166 @@
+{
+  "schema_version": "0.9.0-DualMode",
+  "language_name": "简 (Jian-Lang)",
+  "encoding_bits": 7,
+  "total_slots": 128,
+  "lexical_conventions": {
+    "line_comment": "//",
+    "token_separator": "whitespace or bracket boundaries ([ ], 【 】, 式[ ], @{ }, $[ ])",
+    "string_literal": "double-quoted UTF-8 string with backslash escapes (\\\" \\\\ \\n)"
+  },
+  "preemption_bit_rule": {
+    "bit_index": 6,
+    "hex_mask": "0x40",
+    "chinese_prefix": "立",
+    "symbolic_prefix": "!!",
+    "description": "Setting Bit 6 (+64 / 0x40) turns any base opcode (0x00..0x3F) into a highest-priority queue-preempting instruction (0x40..0x7F). On 项/行 (立项/立行), it also enables pessimistic exclusive register locking."
+  },
+  "slot_delimiters": {
+    "data_state_slot": { "cn": ["[", "]"], "ascii": ["[", "]"], "role": "Strictly data variable, typed register, literal, or Prefix Key-Chain state ONLY (never executable statements)" },
+    "module_code_slot": { "cn": ["【", "】"], "ascii": ["@{", "}"], "role": "Strictly callable 法/项/纲 code closures and branch statement blocks (则 【...】, 通 去 【...】)" },
+    "formula_sandbox_slot": {
+      "cn": ["式[", "]"],
+      "ascii": ["$[", "]"],
+      "role": "Dual-mode algebraic & wavefront expression sandbox",
+      "calling_convention": {
+        "llm_recommended": "建议 LLM 不使用括号而使用嵌套运算层级汉语运算法（如：先先减 / 后幂 / 后后增 / 后后后商），消除远距离括号配对并对齐并行求值波次",
+        "human_recommended": "建议人工使用原始的标准阿拉伯线性表达式（如：((x甲 - 乙) ^ 2 + (x乙 - 乙) ^ 2) / (2 * (戊 ^ 2))），防人工转译笔误",
+        "wavefront_tie_breaking_rule": "同波次算子仅当左右操作数区间互不重叠时可并行归约；若相邻同波次算子共享操作数（如 a 先减 b 先减 c），强制按从左到右结合求值 ((a - b) - c)。"
+      }
+    }
+  },
+  "base_opcodes_64": [
+    { "code": "0x00", "id": 0,  "cn": "定", "sym": ":=",    "ascii": "def",    "domain": "architecture", "preempt_cn": "立定", "implemented_in_core": true,  "desc": "Declare/bind variable, type, visibility, or module" },
+    { "code": "0x01", "id": 1,  "cn": "法", "sym": "?fn",   "ascii": "law",    "domain": "architecture", "preempt_cn": "立法", "implemented_in_core": true,  "desc": "Layer-1 Pure validation guard (read-only; returns 真 or raises 立断)" },
+    { "code": "0x02", "id": 2,  "cn": "项", "sym": "$fn",   "ascii": "task",   "domain": "architecture", "preempt_cn": "立项", "implemented_in_core": true,  "desc": "Layer-2 State-mutation action item (forms atomic STM/CAS unit with 法; 立项 enables pessimistic exclusive lock)" },
+    { "code": "0x03", "id": 3,  "cn": "纲", "sym": "#proj", "ascii": "proj",   "domain": "architecture", "preempt_cn": "立纲", "implemented_in_core": true,  "desc": "Layer-3 Top-level schedulable project/coroutine handle" },
+    { "code": "0x04", "id": 4,  "cn": "事", "sym": "@evt",  "ascii": "evt",    "domain": "architecture", "preempt_cn": "立事", "implemented_in_core": true,  "desc": "Transaction/event pipeline unit" },
+    { "code": "0x05", "id": 5,  "cn": "例", "sym": "~=",    "ascii": "case",   "domain": "architecture", "preempt_cn": "立例", "implemented_in_core": false, "desc": "Schema/instance pattern match (Spec-defined, v1.0 target)" },
+    { "code": "0x06", "id": 6,  "cn": "态", "sym": "$st",   "ascii": "state",  "domain": "architecture", "preempt_cn": "立态", "implemented_in_core": true,  "desc": "Fixed-width Prefix Key-Chain state register (e.g. 态[甲乙:真])" },
+    { "code": "0x07", "id": 7,  "cn": "式", "sym": "$[",    "ascii": "expr",   "domain": "architecture", "preempt_cn": "立式", "implemented_in_core": true,  "desc": "Dual-mode math/wavefront expression sandbox" },
+
+    { "code": "0x08", "id": 8,  "cn": "字", "sym": "str",   "ascii": "str",    "domain": "type",         "preempt_cn": "立字", "implemented_in_core": true,  "desc": "2-byte char / symbol stream type & cast operator" },
+    { "code": "0x09", "id": 9,  "cn": "数", "sym": "num",   "ascii": "num",    "domain": "type",         "preempt_cn": "立数", "implemented_in_core": true,  "desc": "Scalar number (Arabic/Chinese numerals) type & cast operator" },
+    { "code": "0x0A", "id": 10, "cn": "目", "sym": "arr",   "ascii": "arr",    "domain": "type",         "preempt_cn": "立目", "implemented_in_core": true,  "desc": "Indexed array / tensor axis type & cast operator" },
+    { "code": "0x0B", "id": 11, "cn": "典", "sym": "map",   "ascii": "map",    "domain": "type",         "preempt_cn": "立典", "implemented_in_core": true,  "desc": "Bijective key-value dictionary / struct schema type & cast operator" },
+    { "code": "0x0C", "id": 12, "cn": "判", "sym": "bool",  "ascii": "bool",   "domain": "type",         "preempt_cn": "立判", "implemented_in_core": true,  "desc": "Boolean type & inline predicate filter" },
+
+    { "code": "0x0D", "id": 13, "cn": "去", "sym": "->",    "ascii": "to",     "domain": "flow",         "preempt_cn": "立去", "implemented_in_core": true,  "desc": "Left-to-right forward pipeline operator (also →, |>)" },
+    { "code": "0x0E", "id": 14, "cn": "返", "sym": "<-",    "ascii": "ret",    "domain": "flow",         "preempt_cn": "立返", "implemented_in_core": true,  "desc": "Right-to-left value bind (←, =), or directed non-local jump to 【纲/目/法】" },
+    { "code": "0x0F", "id": 15, "cn": "自", "sym": "<-:",   "ascii": "from",   "domain": "flow",         "preempt_cn": "立自", "implemented_in_core": true,  "desc": "Source origin / provenance pointer (src) or template inheritance" },
+    { "code": "0x10", "id": 16, "cn": "通", "sym": "=>",    "ascii": "pass",   "domain": "flow",         "preempt_cn": "立通", "implemented_in_core": true,  "desc": "Unconditional fallthrough / bypass bus" },
+    { "code": "0x11", "id": 17, "cn": "转", "sym": "::",    "ascii": "cast",   "domain": "flow",         "preempt_cn": "立转", "implemented_in_core": true,  "desc": "Zero-wrapper type projection" },
+
+    { "code": "0x12", "id": 18, "cn": "若", "sym": "?(",    "ascii": "if",     "domain": "branch",       "preempt_cn": "立若", "implemented_in_core": true,  "desc": "Primary conditional guard (IF)" },
+    { "code": "0x13", "id": 19, "cn": "则", "sym": ")?",    "ascii": "then",   "domain": "branch",       "preempt_cn": "立则", "implemented_in_core": true,  "desc": "Gated branch execution trigger (THEN)" },
+    { "code": "0x14", "id": 20, "cn": "非", "sym": "!",     "ascii": "not",    "domain": "branch",       "preempt_cn": "立非", "implemented_in_core": true,  "desc": "Logical negation; combines with 若 as 非若 (strictly ELIF / else-if)" },
+    { "code": "0x15", "id": 21, "cn": "否", "sym": ":_",    "ascii": "else",   "domain": "branch",       "preempt_cn": "立否", "implemented_in_core": true,  "desc": "Default fallback branch (ELSE)" },
+    { "code": "0x16", "id": 22, "cn": "立", "sym": "!!",    "ascii": "imm",    "domain": "interrupt",    "preempt_cn": "立",   "implemented_in_core": true,  "desc": "Highest-priority preemption prefix (sets Bit 6; forbidden in arithmetic)" },
+    { "code": "0x17", "id": 23, "cn": "断", "sym": "^!",    "ascii": "brk",    "domain": "interrupt",    "preempt_cn": "立断", "implemented_in_core": true,  "desc": "Circuit-breaker/interrupt flag; raised by 立断, caught by 若 断" },
+
+    { "code": "0x18", "id": 24, "cn": "行", "sym": "$>",    "ascii": "run",    "domain": "schedule",     "preempt_cn": "立行", "implemented_in_core": true,  "desc": "Execute/dispatch module or action (立行 runs with exclusive lock)" },
+    { "code": "0x19", "id": 25, "cn": "止", "sym": ".|",    "ascii": "stop",   "domain": "schedule",     "preempt_cn": "立止", "implemented_in_core": true,  "desc": "Halt local branch/pipeline" },
+    { "code": "0x1A", "id": 26, "cn": "结", "sym": "###",   "ascii": "exit",   "domain": "schedule",     "preempt_cn": "立结", "implemented_in_core": true,  "desc": "Immediate global program termination" },
+    { "code": "0x1B", "id": 27, "cn": "循", "sym": "@*",    "ascii": "loop",   "domain": "schedule",     "preempt_cn": "立循", "implemented_in_core": true,  "desc": "Enter event/scheduler loop" },
+    { "code": "0x1C", "id": 28, "cn": "复", "sym": "@^",    "ascii": "redo",   "domain": "schedule",     "preempt_cn": "立复", "implemented_in_core": true,  "desc": "Restart/resume loop cycle after trap handling (复 循)" },
+    { "code": "0x1D", "id": 29, "cn": "续", "sym": "..>",   "ascii": "cont",   "domain": "schedule",     "preempt_cn": "立续", "implemented_in_core": false, "desc": "Continue/unfreeze suspended coroutine from breakpoint (Spec-defined)" },
+    { "code": "0x1E", "id": 30, "cn": "过", "sym": "/>",    "ascii": "skip",   "domain": "schedule",     "preempt_cn": "立过", "implemented_in_core": false, "desc": "Bypass/skip entire next 纲/目/法 subtree (Spec-defined)" },
+    { "code": "0x1F", "id": 31, "cn": "寻", "sym": "??",    "ascii": "find",   "domain": "schedule",     "preempt_cn": "立寻", "implemented_in_core": true,  "desc": "Pointerless global content-addressable search over public (视:可) registers" },
+    { "code": "0x20", "id": 32, "cn": "替", "sym": "<~>",   "ascii": "swap",   "domain": "schedule",     "preempt_cn": "立替", "implemented_in_core": true,  "desc": "Global parameter or module hot-swap (increments epoch)" },
+    { "code": "0x21", "id": 33, "cn": "先", "sym": "<<",    "ascii": "first",  "domain": "schedule",     "preempt_cn": "立先", "implemented_in_core": true,  "desc": "Primary scheduler slot or early SIMD wavefront prefix (先/先先)" },
+    { "code": "0x22", "id": 34, "cn": "后", "sym": ">>",    "ascii": "after",  "domain": "schedule",     "preempt_cn": "立后", "implemented_in_core": true,  "desc": "Secondary scheduler slot or deferred SIMD wavefront prefix (后/后后/后后后)" },
+
+    { "code": "0x23", "id": 35, "cn": "算", "sym": "@calc", "ascii": "calc",   "domain": "parallel",     "preempt_cn": "立算", "implemented_in_core": false, "desc": "Dispatch heavy compute kernel (Spec-defined)" },
+    { "code": "0x24", "id": 36, "cn": "核", "sym": "@core", "ascii": "core",   "domain": "parallel",     "preempt_cn": "立核", "implemented_in_core": false, "desc": "Bind physical CPU/GPU core affinity (Spec-defined)" },
+    { "code": "0x25", "id": 37, "cn": "并", "sym": "||",    "ascii": "par",    "domain": "parallel",     "preempt_cn": "立并", "implemented_in_core": false, "desc": "Multi-core parallel execution ONLY (never addition)" },
+    { "code": "0x26", "id": 38, "cn": "分", "sym": "/<",    "ascii": "shard",  "domain": "parallel",     "preempt_cn": "立分", "implemented_in_core": false, "desc": "Shard/scatter data or tasks across cores (Spec-defined)" },
+    { "code": "0x27", "id": 39, "cn": "候", "sym": "~t",    "ascii": "wait",   "domain": "clock",        "preempt_cn": "立候", "implemented_in_core": false, "desc": "Timer wait or watchdog timeout guard (Spec-defined)" },
+    { "code": "0x28", "id": 40, "cn": "同", "sym": "=|=",   "ascii": "sync",   "domain": "clock",        "preempt_cn": "立同", "implemented_in_core": false, "desc": "Parallel barrier join ONLY (等待汇合; exclusive lock is 立项/立行)" },
+
+    { "code": "0x29", "id": 41, "cn": "存", "sym": ">[",    "ascii": "store",  "domain": "memory_mesi",  "preempt_cn": "立存", "implemented_in_core": true,  "desc": "MESI Retain: Write and keep latched in register/memory" },
+    { "code": "0x2A", "id": 42, "cn": "归", "sym": "0[",    "ascii": "reset",  "domain": "memory_mesi",  "preempt_cn": "立归", "implemented_in_core": true,  "desc": "MESI Reset: Zero out state/value without freeing slot" },
+    { "code": "0x2B", "id": 43, "cn": "废", "sym": "x[",    "ascii": "inval",  "domain": "memory_mesi",  "preempt_cn": "立废", "implemented_in_core": true,  "desc": "MESI Invalidate: Mark dirty/tombstone, block downstream reads" },
+    { "code": "0x2C", "id": 44, "cn": "放", "sym": "~[",    "ascii": "free",   "domain": "memory_mesi",  "preempt_cn": "立放", "implemented_in_core": true,  "desc": "MESI Free: Physically deallocate slot and prefix key-chain" },
+    { "code": "0x2D", "id": 45, "cn": "取", "sym": "<[",    "ascii": "load",   "domain": "memory_mesi",  "preempt_cn": "立取", "implemented_in_core": true,  "desc": "Load/fetch from register, array, or dictionary" },
+    { "code": "0x2E", "id": 46, "cn": "入", "sym": "<<in",  "ascii": "in",     "domain": "io",           "preempt_cn": "立入", "implemented_in_core": false, "desc": "Standard input stream (Spec-defined)" },
+    { "code": "0x2F", "id": 47, "cn": "出", "sym": ">>out", "ascii": "out",    "domain": "io",           "preempt_cn": "立出", "implemented_in_core": false, "desc": "Standard output stream (Spec-defined)" },
+    { "code": "0x30", "id": 48, "cn": "显", "sym": "@show", "ascii": "print",  "domain": "io",           "preempt_cn": "立显", "implemented_in_core": true,  "desc": "Render/display to human terminal" },
+
+    { "code": "0x31", "id": 49, "cn": "置", "sym": "=[",    "ascii": "init",   "domain": "jiuzhang_math","preempt_cn": "立置", "implemented_in_core": true,  "desc": "Initialize literal array/value onto counting rods" },
+    { "code": "0x32", "id": 50, "cn": "列", "sym": "mat[",  "ascii": "mat",    "domain": "jiuzhang_math","preempt_cn": "立列", "implemented_in_core": false, "desc": "Lay out into matrix row/column (Spec-defined)" },
+    { "code": "0x33", "id": 51, "cn": "增", "sym": "+",     "ascii": "add",    "domain": "jiuzhang_math","preempt_cn": "立增", "implemented_in_core": true,  "desc": "Addition (+) or increment (++ / INC) ONLY" },
+    { "code": "0x34", "id": 52, "cn": "减", "sym": "-",     "ascii": "sub",    "domain": "jiuzhang_math","preempt_cn": "立减", "implemented_in_core": true,  "desc": "Subtraction (-) or decrement (-- / DEC) ONLY" },
+    { "code": "0x35", "id": 53, "cn": "乘", "sym": "*",     "ascii": "mul",    "domain": "jiuzhang_math","preempt_cn": "立乘", "implemented_in_core": true,  "desc": "Multiplication (*)" },
+    { "code": "0x36", "id": 54, "cn": "商", "sym": "/",     "ascii": "div",    "domain": "jiuzhang_math","preempt_cn": "立商", "implemented_in_core": true,  "desc": "Division quotient (/)" },
+    { "code": "0x37", "id": 55, "cn": "余", "sym": "%",     "ascii": "mod",    "domain": "jiuzhang_math","preempt_cn": "立余", "implemented_in_core": true,  "desc": "Modulo remainder (%)" },
+    { "code": "0x38", "id": 56, "cn": "幂", "sym": "^",     "ascii": "pow",    "domain": "jiuzhang_math","preempt_cn": "立幂", "implemented_in_core": true,  "desc": "Exponentiation (^ / **)" },
+    { "code": "0x39", "id": 57, "cn": "消", "sym": "elim",  "ascii": "elim",   "domain": "jiuzhang_math","preempt_cn": "立消", "implemented_in_core": false, "desc": "Matrix row elimination (Spec-defined)" },
+
+    { "code": "0x3A", "id": 58, "cn": "大", "sym": ">",     "ascii": "gt",     "domain": "predicate",    "preempt_cn": "立大", "implemented_in_core": true,  "desc": "Greater than (>); paired with 小 (<) and 等 (==)" },
+    { "code": "0x3B", "id": 59, "cn": "索", "sym": "[]",    "ascii": "idx",    "domain": "indexing_ffi", "preempt_cn": "立索", "implemented_in_core": true,  "desc": "Index lookup by offset/key; paired with 参 (args), 合 (&/join), 引 (import)" },
+    { "code": "0x3C", "id": 60, "cn": "实", "sym": "self",  "ascii": "self",   "domain": "predicate",    "preempt_cn": "立实", "implemented_in_core": true,  "desc": "Active payload value inside predicate; paired with 尽 (EOF)" },
+    { "code": "0x3D", "id": 61, "cn": "真", "sym": "true",  "ascii": "true",   "domain": "constants",    "preempt_cn": "立真", "implemented_in_core": true,  "desc": "State/parity constants family: 真(1)/假(0), 成(01)/败(10)/未(00), 空(null), 偶(even)/奇(odd)" },
+
+    {
+      "code": "0x3E",
+      "id": 62,
+      "cn": "包",
+      "sym": "@pkg",
+      "ascii": "pkg",
+      "domain": "capsule_tree",
+      "preempt_cn": "立包",
+      "implemented_in_core": true,
+      "desc": "SHA-256 tamper-evident data encapsulation & destructuring namespace tree",
+      "sub_operators": {
+        "封": { "sub_id": 0, "sym": "pack",   "preempt_cn": "立封", "desc": "Serialize registers into a SHA-256 signed capsule" },
+        "拆": { "sub_id": 1, "sym": "unpack", "preempt_cn": "立拆", "desc": "Verify SHA-256 digest and deserialize capsule into registers" }
+      }
+    },
+    {
+      "code": "0x3F",
+      "id": 63,
+      "cn": "令",
+      "sym": "@api",
+      "ascii": "api",
+      "domain": "capability_api_tree",
+      "preempt_cn": "立令",
+      "implemented_in_core": true,
+      "desc": "Zero-trust API capability wrapper & governance token (虎符)",
+      "sub_operators": {
+        "视": { "sub_id": 0, "sym": "@vis",     "preempt_cn": "立视", "values": ["可", "不可"], "desc": "Visibility gate: 可 (public) or 不可 (cloaked from external calls and 寻)" },
+        "调": { "sub_id": 1, "sym": "@route",   "preempt_cn": "立调", "desc": "Authorized target 【纲/项/法】 + inline entry guard predicate" },
+        "拒": { "sub_id": 2, "sym": "@deny",    "preempt_cn": "立拒", "desc": "Pre-frame perimeter firewall rejection rule 【法】" },
+        "损": { "sub_id": 3, "sym": "@degrade", "preempt_cn": "立损", "desc": "Quota/token cost deduction & overload graceful degradation handler 【项】 (exclusively 令·损)" }
+      }
+    }
+  ],
+  "dual_mode_aliases": {
+    "arrows_and_pipes": {
+      "->": "去", "→": "去", "|>": "去",
+      "<-": "返", "←": "返", "=": "返", ":=": "定",
+      "<-:": "自", "from": "自",
+      "=>": "通", "::": "转", "$>": "行"
+    },
+    "math_and_logic": {
+      "+": "增", "++": "增",
+      "-": "减", "--": "减",
+      "*": "乘",
+      "/": "商", "除": "商",
+      "%": "余",
+      "^": "幂", "**": "幂",
+      ">": "大", "<": "小", "==": "等", ">=": "大等", "<=": "小等", "!=": "非等",
+      "&": "合", "&&": "合"
+    },
+    "opcode_family_members": {
+      "_comment": "同一基础槽位下的成员字（规范域 8 / 9 所列的 大/小/等 族、索/参/合/引 族、实/尽 族、状态常量族），编码器归一到所属基础算子 cn",
+      "较": "大", "小": "大", "等": "大", "大等": "大", "小等": "大", "非等": "大",
+      "参": "索", "合": "索", "引": "索",
+      "尽": "实",
+      "假": "真", "成": "真", "败": "真", "未": "真", "空": "真", "偶": "真", "奇": "真"
+    },
+    "numerals": {
+      "零": 0, "一": 1, "二": 2, "三": 3, "四": 4,
+      "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10
+    }
+  }
+}

@@ -195,6 +195,19 @@ def dictionary_from_data(data, *, base_bytes: Optional[bytes] = None) -> Diction
                       MappingProxyType(dict(base_info)) if base_info else None)
 
 
+def _resolve_base_path(base_dir: Path, base_path: str) -> Path:
+    name = Path(base_path).name
+    for candidate in (
+        base_dir / base_path,
+        base_dir / name,
+        base_dir / "jian-lang" / name,
+        base_dir.parent / "jian-lang" / name,
+    ):
+        if candidate.is_file():
+            return candidate
+    return base_dir / base_path
+
+
 def load_dictionary(path) -> Dictionary:
     path = Path(path)
     try:
@@ -203,10 +216,7 @@ def load_dictionary(path) -> Dictionary:
         if isinstance(data, dict) and isinstance(data.get("base"), dict):
             base_path = data["base"].get("path")
             if isinstance(base_path, str):
-                candidate = path.parent / base_path
-                if not candidate.exists() and base_path.startswith("../"):
-                    candidate = path.parent / base_path[3:]
-                base_bytes = candidate.read_bytes()
+                base_bytes = _resolve_base_path(path.parent, base_path).read_bytes()
         return dictionary_from_data(data, base_bytes=base_bytes)
     except OSError as exc:
         raise CompileError(f"无法读取字典或来源: {exc}") from exc
